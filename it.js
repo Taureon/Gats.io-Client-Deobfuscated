@@ -48,21 +48,21 @@ var RC = function (id) {
     this.model = null;
     this.activated = 0;
     this.pool = {};
-    this.activate = function (_0x55797b) {
-        this.x = parseFloat(_0x55797b.x / 10);
-        this.y = parseFloat(_0x55797b.y / 10);
-        this.length = parseInt(_0x55797b.length);
-        this.width = parseInt(_0x55797b.width);
-        this.angle = parseInt(_0x55797b.angle);
-        this.spdX = parseInt(_0x55797b.spdX / 25);
-        this.spdY = parseInt(_0x55797b.spdY / 25);
-        this.silenced = parseInt(_0x55797b.silenced);
-        this.isKnife = parseInt(_0x55797b.isKnife);
-        this.isShrapnel = parseInt(_0x55797b.isShrapnel);
-        this.ownerId = parseInt(_0x55797b.ownerId);
-        this.teamCode = parseInt(_0x55797b.teamCode);
-        this.isKnife && (this.model = getModel("knife"));
+    this.activate = function (data) {
+        this.x = parseFloat(data.x / 10);
+        this.y = parseFloat(data.y / 10);
+        this.length = parseInt(data.length);
+        this.width = parseInt(data.width);
+        this.angle = parseInt(data.angle);
+        this.spdX = parseInt(data.spdX / 25);
+        this.spdY = parseInt(data.spdY / 25);
+        this.silenced = parseInt(data.silenced);
+        this.isKnife = parseInt(data.isKnife);
+        this.isShrapnel = parseInt(data.isShrapnel);
+        this.ownerId = parseInt(data.ownerId);
+        this.teamCode = parseInt(data.teamCode);
         this.activated = 1;
+        if (this.isKnife) this.model = a11("knife");
     };
     this.deactivate = function () {
         this.x = this.y = this.length = this.width = this.angle = this.spdX = this.spdY = this.totalLifeTime = this.parent = this.timeAlive = this.silenced = this.animationFrame = this.isKnife = this.isShrapnel = this.ownerId = this.teamCode = this.activated = 0;
@@ -104,14 +104,14 @@ var RC = function (id) {
 };
 
 //the camera
-var RE = function (j58, _0x38623a) {
+var RE = function (j58, data) {
     var entity = {};
     entity.x = 0;
     entity.y = 0;
     entity.spdX = 0;
     entity.spdY = 0;
-    entity.width = _0x38623a.width;
-    entity.height = _0x38623a.height;
+    entity.width = data.width;
+    entity.height = data.height;
     entity.j58 = j58;
     entity.trackingId;
     entity.update = function () {
@@ -183,7 +183,7 @@ RA = function (id) {
         this.emissionRadius = parseInt(data.emissionRadius / 10);
         this.ownerId = parseInt(data.ownerId);
         this.teamCode = parseInt(data.teamCode);
-        this.model = getModel(this.type);
+        this.model = a11(this.type);
         this.activated = 1;
     };
     this.deactivate = function () {
@@ -272,7 +272,7 @@ var RB = function (id) {
         this.maxHp = data.maxHp;
         this.hp = data.hp;
         this.isPremium = data.isPremium;
-        this.model = getModel(this.type, this.isPremium);
+        this.model = a11(this.type, this.isPremium);
         switch (this.type) {
             case "crate":
                 this.width = 50;
@@ -442,27 +442,27 @@ var RD = function (id) {
         this.spdY = parseFloat(data.spdY / 10);
         if (data.id != c3) this.playerAngle = parseInt(data.playerAngle);
     };
-    this.applyAuxUpdate = function (auxUpdateData) {
+    this.applyAuxUpdate = function (data) {
         if (!this.activated) return;
-        if (auxUpdateData.currentBullets !== undefined && auxUpdateData.currentBullets != "") this.currentBullets = parseInt(auxUpdateData.currentBullets);
-        if (auxUpdateData.shooting       !== undefined && auxUpdateData.shooting       != "") this.shooting       = parseInt(auxUpdateData.shooting);
-        if (auxUpdateData.reloading      !== undefined && auxUpdateData.reloading      != "") this.reloading      = parseInt(auxUpdateData.reloading);
-        if (auxUpdateData.hp             !== undefined && auxUpdateData.hp             != "") this.hp             = parseInt(auxUpdateData.hp);
-        if (auxUpdateData.armorAmount    !== undefined && auxUpdateData.armorAmount    != "") this.armorAmount    = parseInt(auxUpdateData.armorAmount);
-        if (auxUpdateData.radius         !== undefined && auxUpdateData.radius         != "") this.radius         = parseInt(auxUpdateData.radius / 10);
-        if (auxUpdateData.ghillie        !== undefined && auxUpdateData.ghillie        != "") this.ghillie        = parseInt(auxUpdateData.ghillie);
-        if (auxUpdateData.maxBullets     !== undefined && auxUpdateData.maxBullets     != "") this.maxBullets     = parseInt(auxUpdateData.maxBullets);
-        if (auxUpdateData.invincible     !== undefined && auxUpdateData.invincible     != "") this.invincible     = parseInt(auxUpdateData.invincible);
-        if (auxUpdateData.dashing        !== undefined && auxUpdateData.dashing        != "") this.dashing        = parseInt(auxUpdateData.dashing);
-        if (auxUpdateData.chatBoxOpen    !== undefined && auxUpdateData.chatBoxOpen    != "") this.chatBoxOpen    = parseInt(auxUpdateData.chatBoxOpen);
-        if (auxUpdateData.color          !== undefined && auxUpdateData.color          != "") this.color          = auxUpdateData.color;
-        if (auxUpdateData.isLeader       !== undefined && auxUpdateData.isLeader       != "") this.isLeader       = parseInt(auxUpdateData.isLeader);
-        if (auxUpdateData.beingHit       !== undefined && auxUpdateData.beingHit       != "") {
-            if (auxUpdateData.id == c3) j37 = 6;
-            this.beingHit = parseInt(auxUpdateData.beingHit)
+        if (data.currentBullets !== undefined && data.currentBullets != "") this.currentBullets = parseInt(data.currentBullets);
+        if (data.shooting       !== undefined && data.shooting       != "") this.shooting       = parseInt(data.shooting);
+        if (data.reloading      !== undefined && data.reloading      != "") this.reloading      = parseInt(data.reloading);
+        if (data.hp             !== undefined && data.hp             != "") this.hp             = parseInt(data.hp);
+        if (data.armorAmount    !== undefined && data.armorAmount    != "") this.armorAmount    = parseInt(data.armorAmount);
+        if (data.radius         !== undefined && data.radius         != "") this.radius         = parseInt(data.radius / 10);
+        if (data.ghillie        !== undefined && data.ghillie        != "") this.ghillie        = parseInt(data.ghillie);
+        if (data.maxBullets     !== undefined && data.maxBullets     != "") this.maxBullets     = parseInt(data.maxBullets);
+        if (data.invincible     !== undefined && data.invincible     != "") this.invincible     = parseInt(data.invincible);
+        if (data.dashing        !== undefined && data.dashing        != "") this.dashing        = parseInt(data.dashing);
+        if (data.chatBoxOpen    !== undefined && data.chatBoxOpen    != "") this.chatBoxOpen    = parseInt(data.chatBoxOpen);
+        if (data.color          !== undefined && data.color          != "") this.color          = data.color;
+        if (data.isLeader       !== undefined && data.isLeader       != "") this.isLeader       = parseInt(data.isLeader);
+        if (data.beingHit       !== undefined && data.beingHit       != "") {
+            if (data.id == c3) j37 = 6;
+            this.beingHit = parseInt(data.beingHit)
         }
-        if (auxUpdateData.j47 !== undefined && auxUpdateData.j47 != "") {
-            this.j47 = auxUpdateData.j47.replace(/~/g, ",");
+        if (data.j47 !== undefined && data.j47 != "") {
+            this.j47 = data.j47.replace(/~/g, ",");
             this.j47Timer = 200
         }
     };
@@ -562,10 +562,11 @@ var RD = function (id) {
         }
         if (c37) {
             var chatMessage = this.j47;
-            chatMessage == "" && this.chatBoxOpen && (chatMessage = "...");
+            if (chatMessage == "" && this.chatBoxOpen) chatMessage = "...";
             if (chatMessage[chatMessage.length - 1] == " ") chatMessage = chatMessage.substring(0, chatMessage.length - 1);
             if (chatMessage.length > 0) {
-                j58.font = "bold 12px Arial", j58.textAlign = "center";
+                j58.font = "bold 12px Arial";
+                j58.textAlign = "center";
                 var _0x16d0bb = j58.measureText(chatMessage).width;
                 j58.globalAlpha = 0.7;
                 j58.fillStyle = this.isPremiumMember ? "#000" : "#7a7a7a";
@@ -819,7 +820,7 @@ function a6(animationType, weaponType, emptyBullets, isClipEmpty) {
             break;
     }
 }
-function getModel(model, playerIsPremium = 0) {
+function a11(model, playerIsPremium = 0) {
     return {
         "crate": crate,
         "longCrate": longCrate,
@@ -987,8 +988,8 @@ function a61(messageFragment) {
             return {
                 code: arr[0],
                 id: arr[1],
-                class: getGunFromGunID(arr[2]),
-                color: getColorFromColorID(arr[3]),
+                class: a62(arr[2]),
+                color: a64(arr[3]),
                 x: arr[4],
                 y: arr[5],
                 radius: arr[6],
@@ -1036,15 +1037,15 @@ function a61(messageFragment) {
                 dashing: arr[12],
                 chatBoxOpen: arr[13],
                 isLeader: arr[14],
-                color: getColorFromColorID(arr[15]),
+                color: a64(arr[15]),
                 j47: arr[16]
             };
         case "d":
             return {
                 code: arr[0],
                 id: arr[1],
-                class: getGunFromGunID(arr[2]),
-                color: getColorFromColorID(arr[3]),
+                class: a62(arr[2]),
+                color: a64(arr[3]),
                 x: arr[4],
                 y: arr[5],
                 radius: arr[6],
@@ -1231,9 +1232,9 @@ function a61(messageFragment) {
                 distanceCovered: parseInt(arr[8]),
                 shooterUsername: arr[9],
                 shooterIsPremiumMember: parseInt(arr[10]),
-                shooterClass: getGunFromGunID(arr[11]),
+                shooterClass: a62(arr[11]),
                 shooterArmor: getArmorFromArmorID(arr[12]),
-                shooterColor: getColorFromColorID(arr[13]),
+                shooterColor: a64(arr[13]),
                 shooterKills: parseInt(arr[14]),
                 shooterScore: parseInt(arr[15]),
                 shooterHp: parseInt(arr[16]),
@@ -1261,23 +1262,23 @@ function a67(arrayBuffer) {
     return a69(arrayBuffer);
 }
 function a68(str) {
-    var _0x288be7 = new ArrayBuffer(str.length),
-        _0x10a3d6 = new Uint8Array(_0x288be7);
+    var buffer = new ArrayBuffer(str.length),
+        uint8buffer = new Uint8Array(buffer);
     for (var i = 0; i < str.length; i++) {
-        _0x10a3d6[i] = str.charCodeAt(i);
+        uint8buffer[i] = str.charCodeAt(i);
     }
-    return _0x10a3d6;
+    return uint8buffer;
 }
 function a69(arrayBuffer) {
     return String.fromCharCode.apply(null, new Uint8Array(arrayBuffer));
 }
-function getGunFromGunID(gunID) {
+function a62(gunID) {
     return ["pistol", "smg", "shotgun", "assault", "bolt-action-rifle", "machine--gun"][gunID];
 }
 function getArmorFromArmorID(armorID) {
     return ["no-armor", "light-armor", "medium-armor", "heavy-armor"][armorID];
 }
-function getColorFromColorID(colorID) {
+function a64(colorID) {
     if (colorID === undefined || colorID.length <= 0) return "";
     return [
         {a: "#f26740", b: "#fcd9cf"},
@@ -1493,16 +1494,17 @@ var RF = function (ip) {
         return "wss";
     };
     this.createPingSocket = function () {
-        this.socket = new WebSocket(this.pingHostname),
-        this.socket.binaryType = "arraybuffer",
-        this.pingSentTime = (new Date).getTime(),
+        this.socket = new WebSocket(this.pingHostname);
+        this.socket.binaryType = "arraybuffer";
+        this.pingSentTime = (new Date).getTime();
         this.socket.onmessage = function () {
-            this.a74(),
-            this.numSuccessfulPings >= 3 ? (
-                console.log("3 successful ping attempts on " + this.displayHostname + " with ping " + this.currentPing + "ms"),
-                b14(this.displayHostname))
-            :
+            this.a74();
+            if (this.numSuccessfulPings >= 3) {
+                console.log("3 successful ping attempts on " + this.displayHostname + " with ping " + this.currentPing + "ms");
+                b14(this.displayHostname);
+            } else {
                 this.a76();
+            }
         }.bind(this);
         console.log("Created test connection to: " + this.displayHostname);
     };
@@ -1513,8 +1515,8 @@ var RF = function (ip) {
         this.socket.onopen = function () {
             console.log("Created game connection to: " + this.displayHostname);
             if (this.socket == null) return;
-            this.socket.onmessage = function (_0x169e0d) {
-                b18(_0x169e0d);
+            this.socket.onmessage = function (wsMsgEvent) {
+                b18(wsMsgEvent);
             };
         }.bind(this);
         this.socket.onclose = function () {
@@ -1854,7 +1856,6 @@ function b14(ip) {
 function a45() {
     console.log("Disconnect Called!");
     !b15 && a93();
-    //irrelevant v v v v
     a4();
     a75();
     b4 = null;
@@ -2152,17 +2153,18 @@ function b20(publicServers) {
     if (publicServers.length > 0) {
         for (var i in publicServers) {
             var serverTableRow = document.createElement("TR"),
-                TDServerGameType = document.createElement("TD");
+                TDServerGameType = document.createElement("TD"),
+                TDServerRegion = document.createElement("TD"),
+                TDServerCity = document.createElement("TD"),
+                TDServerPlayerCount = document.createElement("TD");
             TDServerGameType.appendChild(document.createTextNode(publicServers[i].game_type));
-            serverTableRow.appendChild(TDServerGameType);
-            var TDServerRegion = document.createElement("TD");
             TDServerRegion.appendChild(document.createTextNode(publicServers[i].region));
-            serverTableRow.appendChild(TDServerRegion);
-            var TDServerCity = document.createElement("TD");
             TDServerCity.appendChild(document.createTextNode(publicServers[i].city));
+            TDServerPlayerCount.appendChild(document.createTextNode(publicServers[i].players + "/" + publicServers[i].capacity));
+            serverTableRow.appendChild(TDServerGameType);
+            serverTableRow.appendChild(TDServerRegion);
             serverTableRow.appendChild(TDServerCity);
-            var _0x51dbe9 = document.createElement("TD");
-            _0x51dbe9.appendChild(document.createTextNode(publicServers[i].players + "/" + publicServers[i].capacity)), serverTableRow.appendChild(_0x51dbe9);
+            serverTableRow.appendChild(TDServerPlayerCount);
             var disabledString = "";
             if (publicServers[i].players >= publicServers[i].capacity) disabledString = "disabled";
             var spanElement = document.createElement("span");
@@ -3475,20 +3477,20 @@ function a35() {
     j58.globalAlpha = 1;
 }
 function a12() {
-    var _0x18b315 = [],
-        _0x219e08 = window.innerWidth / 8,
-        _0x8bfc3e = window.innerHeight / 4;
+    var crates = [],
+        width = window.innerWidth / 8,
+        height = window.innerHeight / 4;
     for (var i = 0; i < 8; i++) {
         for (var j = 0; j < 4; j++) {
-            _0x18b315.push({
-                x: randomInt(i * _0x219e08, i * _0x219e08 + _0x219e08 / 1.5),
-                y: randomInt(j * _0x219e08, j * _0x8bfc3e + _0x8bfc3e / 2),
+            crates.push({
+                x: randomInt(i * width, i * width + width / 1.5),
+                y: randomInt(j * width, j * height + height / 2),
                 type: randomInt(1, 2),
                 orientation: randomInt(1, 2)
             });
         }
     }
-    return _0x18b315;
+    return crates;
 }
 function setSelection(selectionElement) {
     var weapons = ["pistol", "smg", "shotgun", "assault", "sniper", "lmg"],
@@ -3825,8 +3827,8 @@ function a41() {
     }
     a113();
     a56();
-    var _0x5e3964 = RF.list[0];
-    _0x5e3964 !== undefined && _0x5e3964.check();
+    var socket = RF.list[0];
+    socket !== undefined && socket.check();
     var now = (new Date).getTime(),
         difference = now - start,
         updateInterval = 16 - difference;
